@@ -1,0 +1,82 @@
+<!DOCTYPE html>  
+<html ng-app="myApp">  
+<head>  
+<title>AngularJS Form Example</title>  
+<!-- AngularJS CDN -->  
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>  
+<style>  
+body {  
+font-family: Arial;  
+background-color: #f4f4f4;  
+text-align: center;  
+}  
+.form-container {  
+width: 3️00px;  
+margin: auto;  
+padding: 20px;  
+background: white;  
+border-radius: 10px;  
+box-shadow: 0 0 10px gray;  
+}  
+input {  
+width: 90%;  
+padding: 8px;  
+margin: 8px 0;  
+}  
+button {  
+padding: 8px 15px;  
+background-color: blue;  
+color: white;  
+border: none;  
+cursor: pointer;  
+}  
+.success {  
+color: green;  
+font-weight: bold;  
+}  
+.error {  
+color: red;  
+}  
+</style>  
+</head>  
+<body ng-controller="formController">  
+<div class="form-container">  
+<h2>User Registration</h2>  
+<form name="userForm" ng-submit="submitForm()">  
+<input type="text" placeholder="Enter Name" ng-model="user.name" required />  
+<input type="email" placeholder="Enter Email" ng-model="user.email" required />  
+<button type="submit">Submit</button>  
+</form>  
+<!-- Event Message -->  
+<p class="success" ng-show="successMessage">  
+{{ successMessage }}  
+</p>  
+<p class="error" ng-show="errorMessage">  
+{{ errorMessage }}  
+</p>  
+ 
+</div>  
+ 
+<script>  
+var app = angular.module("myApp", []);  
+ 
+app.controller("formController", function($scope) {  
+ 
+    $scope.submitForm = function() {  
+ 
+        if ($scope.userForm.$valid) {  
+            $scope.successMessage = "Form Submitted Successfully!";  
+            $scope.errorMessage = "";  
+        }  
+        else {  
+            $scope.errorMessage = "Please fill all fields correctly!";  
+            $scope.successMessage = "";  
+        }  
+ 
+    };  
+ 
+});  
+</script>  
+ 
+</body>  
+</html>

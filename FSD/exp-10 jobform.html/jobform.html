@@ -1,0 +1,118 @@
+<!DOCTYPE html>  
+<html ng-app="jobApp">  
+<head>  
+<title>Job Registration Form</title>  
+<!-- AngularJS CDN -->  
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>  
+<style>  
+body {  
+font-family: Arial;  
+background-color: #f2f2f2;  
+}  
+.container {  
+width: 4️00px;  
+margin: auto;  
+padding: 20px;  
+background: white;  
+border-radius: 10px;  
+box-shadow: 0 0 10px gray;  
+}  
+input, select {  
+width: 100%;  
+padding: 8px;  
+margin: 8px 0;  
+}  
+button {  
+padding: 8px 15px;  
+background-color: green;  
+color: white;  
+border: none;  
+cursor: pointer;  
+}  
+.error {  
+color: red;  
+font-size: 13️px;  
+}  
+.success {  
+color: green;  
+font-weight: bold;  
+}  
+</style>  
+</head>  
+<body ng-controller="jobController">  
+<div class="container">  
+<h2>Job Registration Form</h2>  
+<form name="jobForm" ng-submit="submitForm()" novalidate>  
+<!-- Full Name -->  
+<input type="text" name="fullname"  
+placeholder="Full Name"  
+ng-model="user.fullname"  
+required />  
+<div class="error"  
+ng-show="jobForm.fullname.$touched && jobForm.fullname.$invalid">  
+Name is required.  
+</div>  
+<!-- Email -->  
+<input type="email" name="email"  
+placeholder="Email"  
+ng-model="user.email"  
+required />  
+<div class="error"  
+ng-show="jobForm.email.$touched && jobForm.email.$invalid">  
+Valid email is required.  
+</div>  
+<!-- Mobile -->  
+<input type="text" name="mobile"  
+placeholder="Mobile Number"  
+ng-model="user.mobile"  
+ng-pattern="/^[0-9]{10}$/"  
+required />  
+<div class="error"  
+ng-show="jobForm.mobile.$touched && jobForm.mobile.$invalid">  
+Enter valid 10-digit mobile number.  
+</div>  
+<!-- Qualification -->  
+<select name="qualification"  
+ng-model="user.qualification"  
+required>  
+<option value="">Select Qualification</option>  
+<option>B.Tech</option>  
+<option>M.Tech</option>  
+<option>B.Sc</option>  
+<option>MBA</option>  
+</select>  
+<div class="error"  
+ng-show="jobForm.qualification.$touched && jobForm.qualification.$invalid">  
+Qualification is required.  
+</div>  
+<!-- Password -->  
+<input type="password" name="password"  
+placeholder="Password"  
+ng-model="user.password"  
+ng-minlength="6"  
+required />  
+<div class="error"  
+ng-show="jobForm.password.$touched && jobForm.password.$invalid">  
+Password must be at least 6 characters.  
+</div>  
+<button type="submit" ng-disabled="jobForm.$invalid">  
+Register  
+</button>  
+</form>  
+<!-- Success Message -->  
+<p class="success" ng-show="successMessage">  
+{{ successMessage }}  
+</p>  
+</div>  
+<script>  
+var app = angular.module("jobApp", []);  
+app.controller("jobController", function($scope) {  
+$scope.submitForm = function() {  
+if ($scope.jobForm.$valid) {  
+$scope.successMessage = "Registration Successful!";  
+}  
+};  
+});  
+</script>  
+</body>  
+</html>

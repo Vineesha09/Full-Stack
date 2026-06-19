@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html ng-app="empApp"> 
+<head> 
+<title>Employee Data</title> 
+<!-- AngularJS CDN --> 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script> 
+<style> 
+body { 
+font-family: Arial; 
+background-color: #f2f2f2; 
+text-align: center; 
+} 
+table { 
+margin: auto; 
+border-collapse: collapse; 
+width: 70%; 
+background: white; 
+} 
+th, td { 
+padding: 10px; 
+border: 1px solid black; 
+} 
+th { 
+background-color: #4️CAF50; 
+color : white; 
+} 
+button { 
+padding: 8px 15px; 
+margin: 15px; 
+background-color: blue; 
+color: white; 
+border: none; 
+cursor: pointer; 
+} 
+</style> 
+</head> 
+<body ng-controller="empController"> 
+<h2>Employee Details</h2> 
+<button ng-click="loadData()">Load Employees</button> 
+<table ng-if="employees.length > 0"> 
+<tr> 
+<th>ID</th> 
+<th>Name</th> 
+<th>Department</th> 
+<th>Salary</th> 
+</tr> 
+<tr ng-repeat="emp in employees"> 
+<td>{{emp.id}}</td> 
+<td>{{emp.name}}</td> 
+<td>{{emp.department}}</td> 
+<td>{{emp.salary}}</td> 
+</tr> 
+</table> 
+<script> 
+var app = angular.module("empApp", []); 
+app.controller("empController", function($scope, $http) { 
+$scope.employees = []; 
+$scope.loadData = function() { 
+$http.get("employees.json") 
+.then(function(response) { 
+$scope.employees = response.data; 
+}) 
+.catch(function(error) { 
+alert("Error loading data"); 
+}); 
+}; 
+}); 
+</script> 
+</body> 
+</html>
