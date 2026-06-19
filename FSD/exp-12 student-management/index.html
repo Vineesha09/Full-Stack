@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html ng-app="studentApp"> 
+<head> 
+<title>Student Management</title> 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script> 
+<script src="app.js"></script> 
+</head> 
+<body ng-controller="studentController"> 
+<h2>Student Management System</h2> 
+<form ng-submit="addStudent()"> 
+Name: 
+<input type="text" ng-model="student.name" required><br><br> 
+Roll No: 
+<input type="text" ng-model="student.rollno" required><br><br> 
+Department: 
+<input type="text" ng-model="student.department" required><br><br> 
+Marks: 
+<input type="number" ng-model="student.marks" required><br><br> 
+<button type="submit">Add Student</button> 
+</form> 
+<hr> 
+<h3️>Student List</h3️> 
+<table border="1"> 
+<tr> 
+<th>Name</th> 
+<th>Roll No</th> 
+<th>Department</th> 
+<th>Marks</th> 
+<th>Actions</th> 
+</tr> 
+<tr ng-repeat="s in students"> 
+<td>{{s.name}}</td> 
+<td>{{s.rollno}}</td> 
+<td>{{s.department}}</td> 
+<td>{{s.marks}}</td> 
+<td> 
+<button ng-click="deleteStudent(s._id)">Delete</button> 
+</td> 
+</tr> 
+</table> 
+</body> 
+</html>
